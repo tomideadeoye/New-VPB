@@ -24,6 +24,5 @@ yarn-error.log*
 
 package-lock.json
 yarn.lock
-.eslintrc.json
 
 commit.sh
