@@ -6,13 +6,6 @@
   "license": " Mit license",
   "description": "VerifyPro is a real-time geospatial database of property transactions and ownership in Nigeria.",
   "homepage": "/",
-  "bugs": {
-    "url": "https://github.com/creativetimofficial/ct-material-kit-react/issues"
-  },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/creativetimofficial/ct-material-kit-react.git"
-  },
   "engines": {
     "node": "14 || 15 || 16",
     "npm": ">=6"
