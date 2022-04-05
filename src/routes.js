@@ -108,13 +108,13 @@ const routes = [
     collapse: [
       {
         name: "LASRAB",
-        description: "All about overview, quick start, license and contents",
-        href: "/partners/lasrab",
+        description: "Search through archives of Lagos State records conveniently ",
+        href: routeLoc.RECORDS,
       },
       {
         name: "Enivronmental",
-        description: "See our colors, icons and typography",
-        route: "/partners/environmental",
+        description: "Search through visual maps of publically available environmental records",
+        route: routeLoc.ENVIRONMENT,
       },
     ],
   },
@@ -143,7 +143,7 @@ const footerRoutes = {
     },
     {
       icon: <GitHubIcon />,
-      link: "https://github.com/creativetimofficial",
+      link: "https://github.com/tomideadeoye",
     },
     {
       icon: <YouTubeIcon />,

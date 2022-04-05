@@ -13,6 +13,9 @@ import team2 from "assets/images/timi.png";
 import team3 from "assets/images/temidayo.png";
 import team4 from "assets/images/rachel.png";
 import team5 from "assets/images/mubaarak.png";
+import { Link } from "react-router-dom";
+// import { routeLoc } from "routes";
+import Bio from "pages/Bio";
 
 function Team() {
   return (
@@ -40,14 +43,17 @@ function Team() {
         <Grid container spacing={3}>
           <Grid item xs={12} lg={6}>
             <MKBox mb={1}>
-              <HorizontalTeamCard
-                image={team1}
-                name="Tomide Adeoye"
-                position={{ color: "info", label: "Software Engineer" }}
-                description="Bachelor of Laws (LLB) Software Developer Smart Contract Researcher."
-              />
+              <Link to={<Bio />}>
+                <HorizontalTeamCard
+                  image={team1}
+                  name="Tomide Adeoye"
+                  position={{ color: "info", label: "Software Engineer" }}
+                  description="Bachelor of Laws (LLB) Software Developer Smart Contract Researcher."
+                />
+              </Link>
             </MKBox>
           </Grid>
+
           <Grid item xs={12} lg={6}>
             <MKBox mb={1}>
               <HorizontalTeamCard

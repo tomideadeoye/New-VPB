@@ -23,7 +23,7 @@ import Faqs from "pages/Home/sections/Faqs";
 import BuiltByDevelopers from "pages/Home/components/BuiltByDevelopers";
 
 // import routes from "routes";
-import { footerRoutes } from "routes";
+import { routeLoc, footerRoutes } from "routes";
 
 // Images
 import bgImage from "assets/images/bg-presentation.jpg";
@@ -101,12 +101,12 @@ function Home() {
               <FilledInfoCard
                 variant="gradient"
                 color="info"
-                icon="flag"
+                icon="search"
                 title="Search Tittle Documents"
-                description="Check the possible ways of working with our product and the necessary files for building your own project."
+                description="Enter the relecant no for the title document you are looking to validate."
                 action={{
                   type: "external",
-                  route: "https://www.creative-tim.com/learning-lab/react/overview/material-kit/",
+                  route: routeLoc.DASHBOARD,
                   label: "Let's start",
                 }}
               />
@@ -114,12 +114,12 @@ function Home() {
             <Grid item xs={12} lg={4}>
               <FilledInfoCard
                 color="info"
-                icon="Check Locations on Map"
-                title="Plugins"
-                description="Get inspiration and have an overview about the plugins that we used to create the Material Kit."
+                icon="map"
+                title="Find on Map"
+                description="The map section on your dasboard contains visualizes your searched coordinates"
                 action={{
                   type: "external",
-                  route: "https://www.creative-tim.com/learning-lab/react/overview/datepicker/",
+                  route: routeLoc.DASHBOARD,
                   label: "Read more",
                 }}
               />
@@ -127,12 +127,12 @@ function Home() {
             <Grid item xs={12} lg={4}>
               <FilledInfoCard
                 color="info"
-                icon="apps"
+                icon="public"
                 title="Check Public Records"
-                description="Material Kit is giving you a lot of pre-made components, that will help you to build UI's faster."
+                description="We partner with public institutions to provide additional records about Lagos State."
                 action={{
                   type: "external",
-                  route: "https://www.creative-tim.com/learning-lab/react/alerts/material-kit/",
+                  route: routeLoc.RECORDS,
                   label: "Read more",
                 }}
               />

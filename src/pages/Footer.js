@@ -102,32 +102,32 @@ function CenteredFooter({ company, links, socials, light }) {
 
 // Setting default values for the props of CenteredFooter
 CenteredFooter.defaultProps = {
-  company: { href: "https://www.creative-tim.com/", name: "Creative Tim" },
+  company: { route: "/", name: "VerifyPro" },
   links: [
     { route: routeLoc.ABOUT_US, name: "About Us" },
     { route: routeLoc.DEMO, name: "Demo" },
     { route: routeLoc.DASHBOARD, name: "Dashboard" },
-    { href: "https://www.creative-tim.com/", name: "Company" },
-    { href: "https://www.creative-tim.com/presentation", name: "Team" },
-    { href: "https://www.creative-tim.com/templates/react", name: "Products" },
-    { href: "https://www.creative-tim.com/blog", name: "Blog" },
-    { href: "https://www.creative-tim.com/license", name: "License" },
+    { href: "/", name: "Company" },
+    { href: "/", name: "Team" },
+    { href: "/", name: "Products" },
+    { href: "/", name: "Blog" },
+    { href: "/", name: "License" },
   ],
   socials: [
-    { icon: <FacebookIcon fontSize="small" />, link: "https://www.facebook.com/CreativeTim/" },
+    { icon: <FacebookIcon fontSize="small" />, link: "/" },
     {
       icon: <TwitterIcon fontSize="small" />,
-      link: "https://twitter.com/creativetim",
+      link: "/",
     },
     {
       icon: <InstagramIcon fontSize="small" />,
-      link: "https://www.instagram.com/creativetimofficial/",
+      link: "/",
     },
     {
       icon: <PinterestIcon fontSize="small" />,
-      link: "https://ro.pinterest.com/thecreativetim/",
+      link: "/",
     },
-    { icon: <GitHubIcon fontSize="small" />, link: "https://github.com/creativetimofficial" },
+    { icon: <GitHubIcon fontSize="small" />, link: "/" },
   ],
   light: false,
 };

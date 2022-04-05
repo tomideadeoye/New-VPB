@@ -7,11 +7,11 @@ import MKBox from "components/MKBox";
 // Material Kit 2 React examples
 import DefaultNavbar from "examples/Navbars/DefaultNavbar";
 
-// Author page sections
-import Profile from "pages/Author/sections/Profile";
-import Posts from "pages/Author/sections/Posts";
-import Contact from "pages/Author/sections/Contact";
-import Footer from "pages/Author/sections/Footer";
+// Bio page sections
+import Profile from "pages/Bio/sections/Profile";
+import Posts from "pages/Bio/sections/Posts";
+import Contact from "pages/Bio/sections/Contact";
+import Footer from "pages/Bio/sections/Footer";
 
 // Routes
 import { routes } from "routes";
@@ -19,7 +19,7 @@ import { routes } from "routes";
 // Images
 import bgImage from "assets/images/city-profile.jpg";
 
-function Author() {
+function Bio() {
   return (
     <>
       <DefaultNavbar
@@ -70,4 +70,4 @@ function Author() {
   );
 }
 
-export default Author;
+export default Bio;
