@@ -41,6 +41,7 @@ const fileNoTypeArray = [
   "Gazette No",
   "Tittle No (court)",
   "Survey Plan No",
+  "Others",
 ];
 
 function SearchForm() {
@@ -49,6 +50,7 @@ function SearchForm() {
     state: "",
     fileNo: "",
     fileNoType: "",
+    moreDetails: "",
     lga: "",
     selectedDocument: { file: null },
     selectedFile: null,
@@ -68,35 +70,41 @@ function SearchForm() {
   const handleChecked = () => setChecked(!checked);
 
   return (
-    <Container>
+    <Container sx={{ m: 3 }}>
       <Grid container item justifyContent="center" xs={10} lg={7} mx="auto" textAlign="center">
         <MKTypography variant="h3" mb={1}>
           Make a Search
         </MKTypography>
       </Grid>
+
+      {/* Box width */}
       <Grid container item xs={12} lg={7} sx={{ mx: "auto" }}>
         <Box
           component="form"
-          sx={{
-            "& .MuiTextField-root": { m: 1, width: "25ch" },
-          }}
+          // sx={{
+          //   "& .MuiTextField-root": { m: 1, width: "25ch" },
+          // }}
+          sx={{ width: "100%" }}
           noValidate
           autoComplete="off"
         >
-          {/* <Grid item xs={12}> */}
-          <div>
-            {/* FILE NUMBER */}
-            <FormControl fullWidth sx={{ m: 1 }} variant="standard">
-              <InputLabel htmlFor="standard-adornment-amount">File No</InputLabel>
-              <Input
-                id="standard-adornment-amount"
-                value={values.fileNo}
-                onChange={handleChange("fileNo")}
-              />
-            </FormControl>
+          {/* =========================FILE NUMBER=========================== */}
+          <FormControl fullWidth sx={{ m: 1 }} variant="standard">
+            <InputLabel htmlFor="standard-adornment-amount">File No</InputLabel>
+            <Input
+              id="standard-adornment-amount"
+              value={values.fileNo}
+              onChange={handleChange("fileNo")}
+            />
+          </FormControl>
+          {/* ==================================================== */}
 
-            {/* FILE TYPE */}
+          {/* =========================SELECTS=========================== */}
+
+          {/* ===========FILE NUMBER TYPE============= */}
+          <FormControl fullWidth variant="standard" sx={{ m: 1 }}>
             <TextField
+              fullWidth
               id="state"
               select
               label="Select File No Type"
@@ -110,8 +118,11 @@ function SearchForm() {
                 </MenuItem>
               ))}
             </TextField>
-            {/* SELECT STATE */}
+          </FormControl>
+          {/* SELECT STATE  */}
+          <FormControl fullWidth variant="standard" sx={{ m: 1 }}>
             <TextField
+              fullWidth
               id="state"
               select
               label="Select Property State"
@@ -125,9 +136,12 @@ function SearchForm() {
                 </MenuItem>
               ))}
             </TextField>
-            {/* SELECT LOCAL GOVERNMENT */}
+          </FormControl>
+          {/* SELECT LOCAL GOVERNMENT */}
+          <FormControl fullWidth variant="standard" sx={{ m: 1 }}>
             <TextField
               id="lga"
+              fullWidth
               select
               label="Select Property LGA"
               value={values.lga}
@@ -140,13 +154,22 @@ function SearchForm() {
                 </MenuItem>
               ))}
             </TextField>
-          </div>
-          {/* </Grid> */}
-          <Grid item xs={12}>
-            <TextField variant="standard" label="More Details" multiline fullWidth rows={6} />
-          </Grid>
+          </FormControl>
 
-          <Grid item xs={12} alignItems="center" ml={-1}>
+          {/* ==================================================== */}
+
+          {/* =========================MORE DETAILS=========================== */}
+          <FormControl fullWidth sx={{ m: 1 }} variant="standard">
+            <InputLabel htmlFor="more-details">More Details (optional)</InputLabel>
+            <Input
+              id="more-details"
+              value={values.moreDetails}
+              onChange={handleChange("moreDetails")}
+            />
+          </FormControl>
+          {/* ==================================================== */}
+
+          <Grid item xs={12} alignItems="center" m={0}>
             <Switch checked={checked} onChange={handleChecked} />
             <MKTypography
               variant="button"
@@ -165,12 +188,12 @@ function SearchForm() {
           {/* </Grid> */}
           <Grid container item justifyContent="center" xs={12} my={2} spacing={2}>
             {/* UPLOAD ADD GRID BESIDE SEARCH */}
-            <Grid item xs={4}>
+            {/* <Grid item xs={4}>
               <MKButton variant="gradient" color="info" component="label" fullWidth>
                 Upload File
                 <input type="file" name="upload" onChange={handleChange("selectedDocument")} />
               </MKButton>
-            </Grid>
+            </Grid> */}
             <Grid item xs={8}>
               <MKButton type="submit" variant="gradient" color="dark" fullWidth>
                 Search

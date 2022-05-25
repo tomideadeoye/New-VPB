@@ -58,7 +58,7 @@ function Dashboard() {
       >
         {" "}
         <SearchForm />
-        <MKTypography variant="h3" mb={2}>
+        <MKTypography variant="h3" mb={2} mt={5}>
           Your Previous Searches
         </MKTypography>
         {yourOrders.map((i) => (
