@@ -1,18 +1,3 @@
-/*
-=========================================================
-* Material Kit 2 React - v2.0.0
-=========================================================
-
-* Product Page: https://www.creative-tim.com/product/material-kit-react
-* Copyright 2021 Creative Tim (https://www.creative-tim.com)
-
-Coded by www.creative-tim.com
-
- =========================================================
-
-* The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
-*/
-
 // prop-types is a library for typechecking of props
 import PropTypes from "prop-types";
 
@@ -26,8 +11,11 @@ import MuiLink from "@mui/material/Link";
 // Material Kit 2 React components
 import MKBox from "components/MKBox";
 import MKTypography from "components/MKTypography";
+import { useState } from "react";
 
 function FilledInfoCard({ variant, color, icon, title, description, action }) {
+  const [newVariant, setNewVariant] = useState(variant);
+
   const buttonStyles = {
     width: "max-content",
     display: "flex",
@@ -46,17 +34,23 @@ function FilledInfoCard({ variant, color, icon, title, description, action }) {
 
   let iconColor = color;
 
-  if (variant === "gradient" && color !== "light") {
+  if (newVariant === "gradient" && color !== "light") {
     iconColor = "white";
-  } else if (variant === "gradient" && color === "light") {
+  } else if (newVariant === "gradient" && color === "light") {
     iconColor = "dark";
   }
 
   return (
     <MKBox
+      onMouseOver={() => {
+        setNewVariant("gradient");
+      }}
+      onMouseLeave={() => {
+        setNewVariant(variant);
+      }}
       display={{ xs: "block", md: "flex" }}
-      variant={variant}
-      bgColor={variant === "contained" ? "grey-100" : color}
+      variant={newVariant}
+      bgColor={newVariant === "contained" ? "grey-100" : color}
       borderRadius="xl"
       pt={3.5}
       pb={3}
@@ -66,7 +60,7 @@ function FilledInfoCard({ variant, color, icon, title, description, action }) {
         display="block"
         variant="h3"
         color={iconColor}
-        textGradient={variant === "contained"}
+        textGradient={newVariant === "contained"}
         mt={-0.625}
       >
         {typeof icon === "string" ? <Icon>{icon}</Icon> : icon}
@@ -75,7 +69,7 @@ function FilledInfoCard({ variant, color, icon, title, description, action }) {
         <MKTypography
           display="block"
           variant="5"
-          color={variant === "contained" || color === "light" ? "dark" : "white"}
+          color={newVariant === "contained" || color === "light" ? "dark" : "white"}
           fontWeight="bold"
           mb={1}
         >
@@ -84,7 +78,7 @@ function FilledInfoCard({ variant, color, icon, title, description, action }) {
         <MKTypography
           display="block"
           variant="body2"
-          color={variant === "contained" || color === "light" ? "text" : "white"}
+          color={newVariant === "contained" || color === "light" ? "text" : "white"}
           mb={2}
         >
           {description}
@@ -97,7 +91,7 @@ function FilledInfoCard({ variant, color, icon, title, description, action }) {
             rel="noreferrer"
             variant="body2"
             fontWeight="regular"
-            color={variant === "contained" ? color : "white"}
+            color={newVariant === "contained" ? color : "white"}
             sx={buttonStyles}
           >
             {action.label} <Icon sx={{ fontWeight: "bold" }}>arrow_forward</Icon>
@@ -109,7 +103,7 @@ function FilledInfoCard({ variant, color, icon, title, description, action }) {
             to={action.route}
             variant="body2"
             fontWeight="regular"
-            color={variant === "contained" ? color : "white"}
+            color={newVariant === "contained" ? color : "white"}
             sx={buttonStyles}
           >
             {action.label} <Icon sx={{ fontWeight: "bold" }}>arrow_forward</Icon>
@@ -147,7 +141,7 @@ FilledInfoCard.propTypes = {
     PropTypes.bool,
     PropTypes.shape({
       type: PropTypes.oneOf(["external", "internal"]).isRequired,
-      route: PropTypes.string.isRequired,
+      route: PropTypes.isRequired,
       label: PropTypes.string.isRequired,
     }),
   ]),

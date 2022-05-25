@@ -147,6 +147,7 @@ export {
   sendPasswordReset,
   logout,
   auth,
+  getAuth,
 };
 
 // // Get a list of cities from your database

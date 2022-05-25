@@ -39,8 +39,8 @@ const date = new Date().getFullYear();
 
 const routeLoc = {
   HOME: "/",
-  SIGN_UP: "/authentication/signup",
-  SIGN_IN: "/authentication/sign-in",
+  SIGN_UP: "/signup",
+  SIGN_IN: "/signin",
   APPLICATION_FORM: "/ApplicationForm",
   DEMO: "/demo",
   BLOG: "/blog",
@@ -49,12 +49,13 @@ const routeLoc = {
   DASHBOARD: "/dashboard",
   ABOUT_US: "/company/about-us",
   CONTACT_US: "/company/contact-us",
-  SIGN_OUT: "/authentication/signout",
+  SIGN_OUT: "/signout",
 };
 
 const routes = [
   {
     name: "Company",
+    key: "company",
     icon: <Icon>dashboard</Icon>,
     columns: 1,
     rowsPerColumn: 2,
@@ -64,16 +65,19 @@ const routes = [
         collapse: [
           {
             name: "about us",
+            key: "about-us",
             route: routeLoc.ABOUT_US,
             component: <AboutUs />,
           },
           {
             name: "contact us",
+            key: "contact us",
             route: routeLoc.CONTACT_US,
             component: <ContactUs />,
           },
           {
             name: "Blog",
+            key: "Blog",
             route: routeLoc.BLOG,
             component: <ContactUs />,
           },
@@ -87,16 +91,19 @@ const routes = [
     collapse: [
       {
         name: "sign in",
+        key: "signin",
         route: routeLoc.SIGN_IN,
         component: <SignIn />,
       },
       {
         name: "sign up",
+        key: "signup",
         route: routeLoc.SIGN_UP,
         component: <SignUp />,
       },
       {
         name: "sign out",
+        key: "signout",
         route: routeLoc.SIGN_OUT,
         component: <SignOut />,
       },
@@ -104,15 +111,18 @@ const routes = [
   },
   {
     name: "Records",
+    key: "records",
     icon: <Icon>article</Icon>,
     collapse: [
       {
         name: "LASRAB",
+        key: "LASRAB",
         description: "Search through archives of Lagos State records conveniently ",
         href: routeLoc.RECORDS,
       },
       {
         name: "Enivronmental",
+        key: "Enivronmental",
         description: "Search through visual maps of publically available environmental records",
         route: routeLoc.ENVIRONMENT,
       },
@@ -120,6 +130,7 @@ const routes = [
   },
   {
     name: "Your Dashboard",
+    key: "dashboard",
     icon: <PersonIcon />,
     route: routeLoc.DASHBOARD,
     component: <Dashboard />,
@@ -131,6 +142,7 @@ const footerRoutes = {
     // name: "VerifyPro",
     image: VerifyPro,
     route: "/",
+    key: "brand",
   },
   socials: [
     {

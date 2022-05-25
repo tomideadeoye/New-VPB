@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useRef } from "react";
 
 // @mui material components
 import Container from "@mui/material/Container";
@@ -7,6 +7,7 @@ import Switch from "@mui/material/Switch";
 import MKButton from "components/MKButton";
 import MKTypography from "components/MKTypography";
 import { MenuItem, TextField, Box, FormControl, InputLabel, Input } from "@mui/material";
+import { auth, collection, database, addDoc, getAuth } from "lib/firebase.prod";
 
 const lgaArray = [
   "Alimosho",
@@ -55,6 +56,7 @@ function SearchForm() {
     selectedDocument: { file: null },
     selectedFile: null,
   });
+  const formRef = useRef(null);
 
   const handleChange = (prop) => (event) => {
     if (prop === "selectedDocument") {
@@ -69,6 +71,61 @@ function SearchForm() {
   };
   const handleChecked = () => setChecked(!checked);
 
+  const handleReset = () => {
+    formRef.current.reset();
+    // setValidated(false);
+  };
+  const handleSubmit = async (event) => {
+    event.preventDefault();
+    // const form = event.currentTarget;
+    // if (form.checkValidity() === false) event.stopPropagation();
+    // setValidated(true);
+
+    // const data = new FormData(event.target);
+    // const value = Object.fromEntries(data.entries());
+    // const formJSON = JSON.stringify(values);
+    const userName = auth.currentUser.displayName;
+    const userEmail = auth.currentUser.email;
+    const { uid } = auth.currentUser;
+    const fireData = {
+      userName,
+      userEmail,
+      uid,
+      time: new Date(),
+      propertyOnwership: "unconfirmed",
+      reportUrl: "unavailable",
+    };
+
+    const metaData = Object.assign(fireData, values);
+    console.log(metaData);
+
+    // add to orders and users collections
+    async function addToFirebase() {
+      // eslint-disable-next-line no-unused-vars
+      const docRef = await addDoc(collection(database, "orders"), metaData).catch((error) => {
+        console.log(error);
+      });
+
+      const updates = { docID: docRef.id, orderData: values };
+      getAuth()
+        .updateUser(uid, {
+          userOrders: [updates],
+        })
+        .then((userRecord) => {
+          console.log("Successfully updated user", userRecord.toJSON());
+        })
+        .catch((error) => {
+          console.log("Error updating user:", error);
+        });
+    }
+    addToFirebase();
+
+    // eslint-disable-next-line no-alert
+    alert("Your order has been placed. Please await an email from us");
+    // setValidated(true);
+    handleReset();
+  };
+
   return (
     <Container sx={{ m: 3 }}>
       <Grid container item justifyContent="center" xs={10} lg={7} mx="auto" textAlign="center">
@@ -81,12 +138,14 @@ function SearchForm() {
       <Grid container item xs={12} lg={7} sx={{ mx: "auto" }}>
         <Box
           component="form"
+          ref={formRef}
           // sx={{
           //   "& .MuiTextField-root": { m: 1, width: "25ch" },
           // }}
           sx={{ width: "100%" }}
           noValidate
           autoComplete="off"
+          onSubmit={(e) => handleSubmit(e)}
         >
           {/* =========================FILE NUMBER=========================== */}
           <FormControl fullWidth sx={{ m: 1 }} variant="standard">

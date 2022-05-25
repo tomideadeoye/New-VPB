@@ -99,11 +99,11 @@ function Home() {
           <Grid container spacing={3}>
             <Grid item xs={12} lg={4}>
               <FilledInfoCard
-                variant="gradient"
+                variant="contained"
                 color="info"
                 icon="search"
                 title="Search Tittle Documents"
-                description="Enter the relecant no for the title document you are looking to validate."
+                description="Enter the relevant no for the title document you are looking to validate."
                 action={{
                   type: "external",
                   route: routeLoc.DASHBOARD,

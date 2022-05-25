@@ -25,7 +25,7 @@ import DefaultNavbar from "examples/Navbars/DefaultNavbar";
 import { SimpleFooter } from "pages/Footer";
 
 // Material Kit 2 React page layout routes
-import { routes } from "routes";
+import { routes, routeLoc } from "routes";
 
 // Images
 import bgImage from "assets/images/bg-sign-in-basic.jpeg";
@@ -201,36 +201,36 @@ function SignUp() {
                   </MKBox>
 
                   {/* No account? */}
-                  <MKBox mt={3} mb={0} textAlign="center">
-                    <MKTypography variant="button" color="text">
-                      Don&apos;t have an account?{" "}
-                      <MKTypography
-                        component={Link}
-                        to="/authentication/sign-in"
-                        variant="button"
-                        color="info"
-                        fontWeight="medium"
-                        textGradient
-                      >
-                        Sign In
+                  <Link to={routeLoc.SIGN_UP}>
+                    <MKBox mt={3} mb={0} textAlign="center">
+                      <MKTypography variant="button" color="text">
+                        Already have an account?
+                        <MKTypography
+                          variant="button"
+                          color="info"
+                          fontWeight="medium"
+                          textGradient
+                        >
+                          Sign In
+                        </MKTypography>
                       </MKTypography>
-                    </MKTypography>
-                  </MKBox>
-                  <MKBox mt={0} mb={0} textAlign="center">
-                    <MKTypography variant="button" color="text">
-                      Forgot Password?{" "}
-                      <MKTypography
-                        component={Link}
-                        to="/authentication/reset-password"
-                        variant="button"
-                        color="info"
-                        fontWeight="medium"
-                        textGradient
-                      >
-                        Reset Password
+                    </MKBox>{" "}
+                  </Link>
+                  <Link to={routeLoc.SIGN_UP}>
+                    <MKBox mt={0} mb={0} textAlign="center">
+                      <MKTypography variant="button" color="text">
+                        Forgot Password?{" "}
+                        <MKTypography
+                          variant="button"
+                          color="info"
+                          fontWeight="medium"
+                          textGradient
+                        >
+                          Reset Password
+                        </MKTypography>
                       </MKTypography>
-                    </MKTypography>
-                  </MKBox>
+                    </MKBox>
+                  </Link>
                 </MKBox>
               </MKBox>
             </Card>

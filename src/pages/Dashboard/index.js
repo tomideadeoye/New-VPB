@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from "react";
 import { auth, collection, getDocs, database } from "lib/firebase.prod";
-
 import MKBox from "components/MKBox";
 import { Grid } from "@mui/material";
 // Sections components
