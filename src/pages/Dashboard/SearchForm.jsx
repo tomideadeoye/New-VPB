@@ -1,13 +1,16 @@
+/* eslint-disable no-unused-vars */
+/* eslint-disable no-console */
+/* eslint-disable no-alert */
 import { useState, useRef } from "react";
-
-// @mui material components
+import { authListener } from "hooks";
 import Container from "@mui/material/Container";
 import Grid from "@mui/material/Grid";
 import Switch from "@mui/material/Switch";
 import MKButton from "components/MKButton";
 import MKTypography from "components/MKTypography";
 import { MenuItem, TextField, Box, FormControl, InputLabel, Input } from "@mui/material";
-import { auth, collection, database, addDoc, getAuth } from "lib/firebase.prod";
+import { auth, collection, database, addDoc, uploadToFireBase } from "lib/firebase.prod";
+import { getAuth } from "firebase/auth";
 
 const lgaArray = [
   "Alimosho",
@@ -53,30 +56,33 @@ function SearchForm() {
     fileNoType: "",
     moreDetails: "",
     lga: "",
-    selectedDocument: { file: null },
-    selectedFile: null,
+    file: "",
+    name: "",
+    email: "",
   });
+  const [progresspercent, setProgresspercent] = useState(0);
   const formRef = useRef(null);
 
-  const handleChange = (prop) => (event) => {
-    if (prop === "selectedDocument") {
-      setValues({
-        ...values,
-        selectedDocument: { file: event.target.files[0] },
-        selectedFile: event.target.files[0],
-      });
+  const handleChange = async (e, prop) => {
+    const handleUrl = (url) => {
+      setValues({ ...values, file: url });
+    };
+
+    e.preventDefault();
+    if (prop === "file") {
+      await uploadToFireBase(e.target.files[0], handleUrl, setProgresspercent);
     } else {
-      setValues({ ...values, [prop]: event.target.value });
+      setValues({ ...values, [prop]: e.target.value });
     }
   };
-  const handleChecked = () => setChecked(!checked);
+  // const handleChecked = () => setChecked(!checked);
 
-  const handleReset = () => {
-    formRef.current.reset();
-    // setValidated(false);
-  };
-  const handleSubmit = async (event) => {
-    event.preventDefault();
+  const handleReset = () => formRef.current.reset();
+
+  // setValidated(false);
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
     // const form = event.currentTarget;
     // if (form.checkValidity() === false) event.stopPropagation();
     // setValidated(true);
@@ -97,33 +103,63 @@ function SearchForm() {
     };
 
     const metaData = Object.assign(fireData, values);
-    console.log(metaData);
-
     // add to orders and users collections
     async function addToFirebase() {
-      // eslint-disable-next-line no-unused-vars
       const docRef = await addDoc(collection(database, "orders"), metaData).catch((error) => {
         console.log(error);
       });
 
-      const updates = { docID: docRef.id, orderData: values };
-      getAuth()
-        .updateUser(uid, {
-          userOrders: [updates],
-        })
-        .then((userRecord) => {
-          console.log("Successfully updated user", userRecord.toJSON());
-        })
-        .catch((error) => {
-          console.log("Error updating user:", error);
-        });
+      // await updateProfile(nauth.currentUser, {
+      //   displayName: "Jane Q. User",
+      //   photoURL: "https://example.com/jane-q-user/profile.jpg",
+      //   userOrders: [docRef.id],
+      // })
+      //   .then(() => {
+      //     console.log("Successfully updated user");
+      //     handleReset();
+      //   })
+      //   .catch((error) => {
+      //     console.log("Error updating user:", error);
+      //   });
+      // const q = await collection(database, "users")
+      //   .where("uid", "==", uid)
+      //   .get()
+      //   .then((snapshot) => {
+      //     snapshot.forEach((doc) => {
+      //       console.log(doc.data());
+      //       const userOrders = doc.data().userOrders;
+      //       userOrders.push(docRef.id);
+      //       updateDoc(collection(database, "users"), doc.id, { userOrders });
+      //     });
+      //   })
+      //   .catch((error) => {
+      //     console.log(error);
+      //   });
+
+      //   // console.log(q.id);
+      //   // const docs = await getDocs(q);
+      //   // console.log(docs.id);
+      //   // await updateDoc(docs, {
+      //   //   capital: true,
+      //   //   userOrders: [docRef.id],
+      //   // });
+
+      //   // await addDoc(collection(database, "users"), {
+      //   //   userOrders: [docRef.id],
+      //   // });
+      //   // database
+      //   //   .collection("users")
+      //   //   .doc(nauth.currentUser)
+      //   //   .update({
+      //   //     // userOrders: firebase.firestore.FieldValue.arrayUnion(docRef.id),
+      //   //     userOrders: [docRef.id],
+      //   //   });
     }
     addToFirebase();
 
-    // eslint-disable-next-line no-alert
     alert("Your order has been placed. Please await an email from us");
-    // setValidated(true);
     handleReset();
+    // setValidated(true);
   };
 
   return (
@@ -147,20 +183,40 @@ function SearchForm() {
           autoComplete="off"
           onSubmit={(e) => handleSubmit(e)}
         >
+          {/* IF USER NOT AUTHENTICATED, COLLECT NAME AND EMAIL AND SIGNUP */}
+          {authListener(
+            null,
+            <div>
+              <FormControl fullWidth sx={{ m: 1 }} variant="standard">
+                <InputLabel htmlFor="standard-adornment-amount">Full Name</InputLabel>
+                <Input
+                  id="standard-adornment-amount"
+                  value={values.name}
+                  onChange={(e) => handleChange(e, "name")}
+                />
+              </FormControl>
+              <FormControl fullWidth sx={{ m: 1 }} variant="standard">
+                <InputLabel htmlFor="standard-adornment-amount">Email Address</InputLabel>
+                <Input
+                  id="standard-adornment-amount"
+                  value={values.email}
+                  onChange={(e) => handleChange(e, "email")}
+                />
+              </FormControl>
+            </div>
+          )}
           {/* =========================FILE NUMBER=========================== */}
           <FormControl fullWidth sx={{ m: 1 }} variant="standard">
             <InputLabel htmlFor="standard-adornment-amount">File No</InputLabel>
             <Input
               id="standard-adornment-amount"
               value={values.fileNo}
-              onChange={handleChange("fileNo")}
+              onChange={(e) => handleChange(e, "fileNo")}
             />
           </FormControl>
-          {/* ==================================================== */}
-
+          {/* =========================================================== */}
           {/* =========================SELECTS=========================== */}
-
-          {/* ===========FILE NUMBER TYPE============= */}
+          {/* ======================FILE NUMBER TYPE===================== */}
           <FormControl fullWidth variant="standard" sx={{ m: 1 }}>
             <TextField
               fullWidth
@@ -168,7 +224,7 @@ function SearchForm() {
               select
               label="Select File No Type"
               value={values.fileNoType}
-              onChange={handleChange("fileNoType")}
+              onChange={(e) => handleChange(e, "fileNoType")}
               variant="standard"
             >
               {fileNoTypeArray.map((i) => (
@@ -186,7 +242,7 @@ function SearchForm() {
               select
               label="Select Property State"
               value={values.state}
-              onChange={handleChange("state")}
+              onChange={(e) => handleChange(e, "state")}
               variant="standard"
             >
               {stateArray.map((i) => (
@@ -204,7 +260,7 @@ function SearchForm() {
               select
               label="Select Property LGA"
               value={values.lga}
-              onChange={handleChange("lga")}
+              onChange={(e) => handleChange(e, "lga")}
               variant="standard"
             >
               {lgaArray.map((i) => (
@@ -214,21 +270,19 @@ function SearchForm() {
               ))}
             </TextField>
           </FormControl>
-
           {/* ==================================================== */}
-
           {/* =========================MORE DETAILS=========================== */}
           <FormControl fullWidth sx={{ m: 1 }} variant="standard">
             <InputLabel htmlFor="more-details">More Details (optional)</InputLabel>
             <Input
               id="more-details"
               value={values.moreDetails}
-              onChange={handleChange("moreDetails")}
+              onChange={(e) => handleChange(e, "moreDetails")}
             />
           </FormControl>
-          {/* ==================================================== */}
+          {/* ===================TERMS AND CONDITIONS=========================== */}
 
-          <Grid item xs={12} alignItems="center" m={0}>
+          {/* <Grid item xs={12} alignItems="center" m={0}>
             <Switch checked={checked} onChange={handleChecked} />
             <MKTypography
               variant="button"
@@ -243,19 +297,21 @@ function SearchForm() {
             <MKTypography component="a" href="#" variant="button" fontWeight="regular" color="dark">
               Terms and Conditions
             </MKTypography>
-          </Grid>
+          </Grid> */}
           {/* </Grid> */}
+
+          {/* ====================UPLOAD BUTTON ======================== */}
           <Grid container item justifyContent="center" xs={12} my={2} spacing={2}>
-            {/* UPLOAD ADD GRID BESIDE SEARCH */}
-            {/* <Grid item xs={4}>
+            <Grid item xs={4}>
               <MKButton variant="gradient" color="info" component="label" fullWidth>
-                Upload File
-                <input type="file" name="upload" onChange={handleChange("selectedDocument")} />
+                <input type="file" name="img" hidden onChange={(e) => handleChange(e, "file")} />
+                {progresspercent === 0 ? <p>Upload File</p> : <p> Progress: {progresspercent}%</p>}
               </MKButton>
-            </Grid> */}
+            </Grid>
+            {/*  =======================SUBMIT BUTTON ====================== */}
             <Grid item xs={8}>
               <MKButton type="submit" variant="gradient" color="dark" fullWidth>
-                Search
+                SUBMIT
               </MKButton>
             </Grid>
           </Grid>

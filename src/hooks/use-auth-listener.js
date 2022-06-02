@@ -23,3 +23,8 @@ export default function useAuthListener() {
 
   return { user };
 }
+
+export function authListener(option1, option2) {
+  const auth = useAuthListener().user;
+  return auth ? option1 : option2;
+}

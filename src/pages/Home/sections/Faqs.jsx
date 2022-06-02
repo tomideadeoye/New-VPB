@@ -2,12 +2,10 @@ import * as React from "react";
 import Accordion from "@mui/material/Accordion";
 import AccordionSummary from "@mui/material/AccordionSummary";
 import AccordionDetails from "@mui/material/AccordionDetails";
-import Typography from "@mui/material/Typography";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 import MKBox from "components/MKBox";
 import MKBadge from "components/MKBadge";
 import MKTypography from "components/MKTypography";
-// @mui material components
 import Container from "@mui/material/Container";
 import Grid from "@mui/material/Grid";
 
@@ -76,10 +74,16 @@ export default function Accordions() {
               aria-controls="panel1a-content"
               id="panel1a-header"
             >
-              <Typography>{item.header}</Typography>
+              <MKTypography variant="body1" color="text">
+                {item.header}
+              </MKTypography>
             </AccordionSummary>
             <AccordionDetails>
-              <Typography>{item.body}</Typography>
+              <MKBox variant="gradient" color="primary">
+                <MKTypography variant="body1" color="text">
+                  {item.body}
+                </MKTypography>
+              </MKBox>
             </AccordionDetails>
           </Accordion>
         ))}{" "}

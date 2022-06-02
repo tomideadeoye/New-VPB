@@ -1,11 +1,9 @@
 import MKBox from "components/MKBox";
 import DefaultNavbar from "examples/Navbars/DefaultNavbar";
-import { useAuthListener } from "hooks";
+import { authListener } from "hooks";
 import { routes, routeLoc } from "routes";
 
 function NavbarDark() {
-  const auth = useAuthListener().user;
-
   const signin = {
     type: "internal",
     route: routeLoc.SIGN_IN,
@@ -24,7 +22,7 @@ function NavbarDark() {
     <MKBox variant="gradient" bgColor="dark" shadow="sm" py={0.25}>
       <DefaultNavbar
         routes={routes}
-        action={!auth ? signin : dashboard}
+        action={authListener(dashboard, signin)}
         transparent
         relative
         light

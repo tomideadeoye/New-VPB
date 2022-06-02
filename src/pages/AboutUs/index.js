@@ -1,21 +1,17 @@
-// @mui material components
 import Container from "@mui/material/Container";
 import Grid from "@mui/material/Grid";
 import Card from "@mui/material/Card";
-
-// Material Kit 2 React components
 import MKBox from "components/MKBox";
 import MKTypography from "components/MKTypography";
 import MKButton from "components/MKButton";
-
-// Material Kit 2 React examples
 import DefaultNavbar from "examples/Navbars/DefaultNavbar";
 import { DefaultFooter } from "pages/Footer";
+import { authListener } from "hooks";
 
 // About Us page sections
 import Information from "pages/AboutUs/sections/Information";
 import Team from "pages/AboutUs/sections/Team";
-import Featuring from "pages/AboutUs/sections/Featuring";
+// import Featuring from "pages/AboutUs/sections/Featuring";
 import Newsletter from "pages/AboutUs/sections/Newsletter";
 import { routes, routeLoc, footerRoutes } from "routes";
 
@@ -24,6 +20,8 @@ import bgImage from "assets/images/lagos1.jpg";
 import { Link } from "react-router-dom";
 
 function AboutUs() {
+  // Auth listener function
+
   return (
     <>
       <DefaultNavbar
@@ -83,7 +81,10 @@ function AboutUs() {
               sx={{ color: ({ palette: { dark } }) => dark.main }}
               route="/"
             >
-              <Link to={routeLoc.SIGN_UP}> create account</Link>
+              {authListener(
+                <Link to={routeLoc.SIGN_UP}> Dashboard</Link>,
+                <Link to={routeLoc.SIGN_UP}> create account</Link>
+              )}
             </MKButton>
             <MKTypography variant="h6" color="white" mt={8} mb={1}>
               Find us on
@@ -116,7 +117,7 @@ function AboutUs() {
       >
         <Information />
         <Team />
-        <Featuring />
+        {/* <Featuring /> */}
         <Newsletter />
       </Card>
       <MKBox pt={6} px={1} mt={6}>

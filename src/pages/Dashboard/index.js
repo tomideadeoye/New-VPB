@@ -31,6 +31,39 @@ function Dashboard() {
     };
     getSearches();
   }, []);
+
+  const previousSearches = () => (
+    <>
+      <MKTypography variant="h3" mb={2} mt={5}>
+        Your Previous Searches
+      </MKTypography>
+      {yourOrders.map((i) => (
+        <View title={`File NO: ${i.fileNo}`} mapDetails={tabsSimpleCode}>
+          <MKBox bgColor="white" py={6}>
+            <Grid container rowSpacing={1} columnSpacing={{ xs: 1, sm: 2, md: 3 }}>
+              <Grid item xs={6}>
+                <MKTypography variant="body1" mb={2}>
+                  <div>Order Placed By: {i.userName}</div>
+                  <div>Document Number: {i.fileNo}</div>
+                  <div> State: {i.state}</div>
+                  <div> Local Government Area: {i.lga}</div>
+                  <div> Location: {i.location}</div>
+                  <img src={i.file} alt="chdk" width="120px" height="120px" />
+                  {/* <div>Search Received on: {String(i.time.toLocaleDateString())}</div> */}
+                  <div> Report Url: {i.reportUrl}</div>
+                </MKTypography>
+              </Grid>
+
+              <Grid item xs={6}>
+                <TimelineProgress />
+              </Grid>
+            </Grid>
+          </MKBox>
+        </View>
+      ))}
+    </>
+  );
+
   return (
     <MKBox display="flex" flexDirection="column" bgColor="white" minHeight="100vh">
       {/* NAVBAR */}
@@ -57,32 +90,7 @@ function Dashboard() {
       >
         {" "}
         <SearchForm />
-        <MKTypography variant="h3" mb={2} mt={5}>
-          Your Previous Searches
-        </MKTypography>
-        {yourOrders.map((i) => (
-          <View title={`File NO: ${i["Document Number"]}`} mapDetails={tabsSimpleCode}>
-            <MKBox bgColor="white" py={6}>
-              <Grid container rowSpacing={1} columnSpacing={{ xs: 1, sm: 2, md: 3 }}>
-                <Grid item xs={6}>
-                  <MKTypography variant="body1" mb={2}>
-                    <div>Order Placed By: {i.userName}</div>
-                    {/* <div> {i.time}</div> */}
-                    <div>Document Number: {i["Document Number"]}</div>
-                    <div> Local Government Area: {i.lga}</div>
-                    <div> Location: {i.location}</div>
-                    <div> Ownership Status: {i.propertyOnwership}</div>
-                    <div> Report Url: {i.reportUrl}</div>
-                  </MKTypography>
-                </Grid>
-
-                <Grid item xs={6}>
-                  <TimelineProgress />
-                </Grid>
-              </Grid>
-            </MKBox>
-          </View>
-        ))}
+        {yourOrders.length > 0 && previousSearches()}
       </BaseLayout>
     </MKBox>
   );

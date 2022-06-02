@@ -1,5 +1,18 @@
+/* eslint-disable no-alert */
+/* eslint-disable no-console */
+/* eslint-disable no-unused-vars */
 import { initializeApp } from "firebase/app";
-import { getFirestore, query, getDocs, collection, where, addDoc } from "firebase/firestore";
+import {
+  getFirestore,
+  query,
+  getDocs,
+  collection,
+  where,
+  addDoc,
+  doc,
+  updateDoc,
+} from "firebase/firestore";
+
 import {
   GoogleAuthProvider,
   getAuth,
@@ -9,6 +22,13 @@ import {
   sendPasswordResetEmail,
   signOut,
 } from "firebase/auth";
+import {
+  getStorage,
+  ref,
+  uploadBytesResumable,
+  getDownloadURL,
+  uploadBytes,
+} from "firebase/storage";
 
 // 1) when seeding the database you'll have to uncomment this!
 // import { seedDatabase } from "../seed";
@@ -24,10 +44,11 @@ const config = {
 };
 
 // const firebase = Firebase.initializeApp(config);
-const firebase = initializeApp(config);
-const auth = getAuth(firebase);
-const database = getFirestore(firebase);
+const app = initializeApp(config);
+const auth = getAuth(app);
+const database = getFirestore(app);
 const googleProvider = new GoogleAuthProvider();
+const storage = getStorage(app);
 
 // const addProp = async () => {
 //   try {
@@ -119,7 +140,6 @@ const registerWithEmailAndPassword = async (name, email, password) => {
       email,
     });
   } catch (err) {
-    console.error(err);
     alert(err.message);
     return err;
   }
@@ -136,6 +156,34 @@ const sendPasswordReset = async (email) => {
 const logout = () => {
   signOut(auth);
 };
+
+const uploadToFireBase = (file, handleUrl, setProgresspercent) => {
+  if (!file) {
+    alert("Please select a file");
+    return;
+  }
+
+  const storageRef = ref(storage, `files/${file.name}`);
+  const uploadTask = uploadBytesResumable(storageRef, file);
+  uploadTask.on(
+    "state_changed",
+    (snapshot) => {
+      const progress = Math.round((snapshot.bytesTransferred / snapshot.totalBytes) * 100);
+      setProgresspercent(progress);
+    },
+    (error) => {
+      alert(error);
+    },
+    () => {
+      getDownloadURL(uploadTask.snapshot.ref).then((downloadURL) => {
+        handleUrl(downloadURL);
+        alert(`Your file has been uploaded and is available at: ${downloadURL}`);
+        console.warn(downloadURL);
+      });
+    }
+  );
+};
+
 export {
   database,
   getDocs,
@@ -146,8 +194,16 @@ export {
   registerWithEmailAndPassword,
   sendPasswordReset,
   logout,
+  query,
+  getDownloadURL,
   auth,
   getAuth,
+  where,
+  doc,
+  updateDoc,
+  storage,
+  ref,
+  uploadToFireBase,
 };
 
 // // Get a list of cities from your database
