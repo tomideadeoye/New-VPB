@@ -33,7 +33,7 @@ import YouTubeIcon from "@mui/icons-material/YouTube";
 import MKTypography from "components/MKTypography";
 
 // Images
-import VerifyPro from "assets/images/VerifyPro.png";
+import VerifyPro from "assets/images/logos/logo.png";
 
 const date = new Date().getFullYear();
 

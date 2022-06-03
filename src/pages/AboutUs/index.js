@@ -12,12 +12,12 @@ import { authListener } from "hooks";
 import Information from "pages/AboutUs/sections/Information";
 import Team from "pages/AboutUs/sections/Team";
 // import Featuring from "pages/AboutUs/sections/Featuring";
-import Newsletter from "pages/AboutUs/sections/Newsletter";
+// import Newsletter from "pages/AboutUs/sections/Newsletter";
+import Waitlist from "pages/Home/sections/Waitlist";
 import { routes, routeLoc, footerRoutes } from "routes";
-
-// Images
 import bgImage from "assets/images/lagos1.jpg";
 import { Link } from "react-router-dom";
+import newsletter from "assets/images/newsletter.png";
 
 function AboutUs() {
   // Auth listener function
@@ -118,7 +118,8 @@ function AboutUs() {
         <Information />
         <Team />
         {/* <Featuring /> */}
-        <Newsletter />
+        {/* <Newsletter /> */}
+        <Waitlist image={newsletter} />
       </Card>
       <MKBox pt={6} px={1} mt={6}>
         <DefaultFooter content={footerRoutes} />

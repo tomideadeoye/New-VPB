@@ -43,19 +43,6 @@ function Team() {
         <Grid container spacing={3}>
           <Grid item xs={12} lg={6}>
             <MKBox mb={1}>
-              <Link to={<Bio />}>
-                <HorizontalTeamCard
-                  image={team1}
-                  name="Tomide Adeoye"
-                  position={{ color: "info", label: "Software Engineer" }}
-                  description="Bachelor of Laws (LLB) Software Developer Smart Contract Researcher."
-                />
-              </Link>
-            </MKBox>
-          </Grid>
-
-          <Grid item xs={12} lg={6}>
-            <MKBox mb={1}>
               <HorizontalTeamCard
                 image={team2}
                 name="Timileyin Idowu"
@@ -92,6 +79,18 @@ function Team() {
                 position={{ color: "info", label: "Civil Engineer" }}
                 description="BSc. Civil Engineering Quality Control/Site Engineer Member ASCE, NICE."
               />
+            </MKBox>
+          </Grid>
+          <Grid item xs={12} lg={6}>
+            <MKBox mb={1}>
+              <Link to={<Bio />}>
+                <HorizontalTeamCard
+                  image={team1}
+                  name="Tomide Adeoye"
+                  position={{ color: "info", label: "Software Engineer" }}
+                  description="Bachelor of Laws (LLB) Software Developer Smart Contract Researcher."
+                />
+              </Link>
             </MKBox>
           </Grid>
         </Grid>

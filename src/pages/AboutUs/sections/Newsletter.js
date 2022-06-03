@@ -7,8 +7,6 @@ import MKBox from "components/MKBox";
 import MKTypography from "components/MKTypography";
 import MKInput from "components/MKInput";
 import MKButton from "components/MKButton";
-
-// Images
 import newsletter from "assets/images/newsletter.png";
 
 function Newsletter() {

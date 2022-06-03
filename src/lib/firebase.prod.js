@@ -9,6 +9,7 @@ import {
   collection,
   where,
   addDoc,
+  setDoc,
   doc,
   updateDoc,
 } from "firebase/firestore";
@@ -183,6 +184,25 @@ const uploadToFireBase = (file, handleUrl, setProgresspercent) => {
     }
   );
 };
+const dataSource = {
+  name: "Tomide Awesome",
+  email: "tomiadeawesome@gmail.com",
+  content: "content",
+};
+
+const contactUs = async (data) => {
+  // create name of firebase document
+  const docName = data.email + data.content.substring(0, 10);
+
+  try {
+    const docRef = doc(database, "subscribers", data.email);
+    setDoc(docRef, data, { capital: true }, { merge: true });
+    // await setDoc(doc(database, "subscribers", data.email), data);
+    console.log("Document written with ID: ", docRef.id);
+  } catch (err) {
+    alert(err.message);
+  }
+};
 
 export {
   database,
@@ -199,6 +219,7 @@ export {
   auth,
   getAuth,
   where,
+  contactUs,
   doc,
   updateDoc,
   storage,

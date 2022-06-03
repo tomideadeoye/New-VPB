@@ -2,35 +2,22 @@
 /* eslint-disable import/prefer-default-export */
 // prop-types is a library for typechecking of props
 import Container from "@mui/material/Container";
-import Icon from "@mui/material/Icon";
 import PropTypes from "prop-types";
-
-// Material Kit 2 React components
-
-// Material Kit 2 React base styles
 import typography from "assets/theme/base/typography";
-
-// @mui material components
 import Link from "@mui/material/Link";
 import Grid from "@mui/material/Grid";
 import Stack from "@mui/material/Stack";
-
-// @mui icons
 import FacebookIcon from "@mui/icons-material/Facebook";
 import TwitterIcon from "@mui/icons-material/Twitter";
 import InstagramIcon from "@mui/icons-material/Instagram";
 import PinterestIcon from "@mui/icons-material/Pinterest";
 import GitHubIcon from "@mui/icons-material/GitHub";
-
-// Material Kit 2 React components
 import MKBox from "components/MKBox";
 import MKTypography from "components/MKTypography";
 import { routeLoc } from "routes";
 
-// CENTERED FOOTER
-
 function CenteredFooter({ company, links, socials, light }) {
-  const { href, name } = company;
+  const { name, href } = company;
 
   const year = new Date().getFullYear();
 
@@ -81,7 +68,7 @@ function CenteredFooter({ company, links, socials, light }) {
         </Grid>
         <Grid item xs={12} lg={8} sx={{ textAlign: "center" }}>
           <MKTypography variant="body2" color={light ? "white" : "secondary"}>
-            Copyright &copy; {year} Material by{" "}
+            Copyright &copy; {year}
             <MKTypography
               component={Link}
               href={href}
@@ -104,9 +91,9 @@ function CenteredFooter({ company, links, socials, light }) {
 CenteredFooter.defaultProps = {
   company: { route: "/", name: "VerifyPro" },
   links: [
-    { route: routeLoc.ABOUT_US, name: "About Us" },
-    { route: routeLoc.DEMO, name: "Demo" },
-    { route: routeLoc.DASHBOARD, name: "Dashboard" },
+    { href: routeLoc.ABOUT_US, name: "About Us" },
+    { href: routeLoc.DEMO, name: "Demo" },
+    { href: routeLoc.DASHBOARD, name: "Dashboard" },
     { href: "/", name: "Company" },
     { href: "/", name: "Team" },
     { href: "/", name: "Products" },
@@ -139,7 +126,7 @@ CenteredFooter.defaultProps = {
 // @mui material components
 
 function SimpleFooter({ company, links, light }) {
-  const { href, name } = company;
+  const { name } = company;
   const { size } = typography;
 
   const renderLinks = () =>
@@ -176,19 +163,14 @@ function SimpleFooter({ company, links, light }) {
           color={light ? "white" : "text"}
           fontSize={size.sm}
         >
-          &copy; {new Date().getFullYear()}, made with
-          <MKBox fontSize={size.md} color={light ? "white" : "text"} mb={-0.5} mx={0.25}>
-            <Icon color="inherit" fontSize="inherit">
-              favorite
-            </Icon>
-          </MKBox>
-          by
-          <Link href={href} target="_blank">
+          {" "}
+          <Link to={routeLoc.HOME}>
             <MKTypography variant="button" fontWeight="medium" color={light ? "white" : "dark"}>
               &nbsp;{name}&nbsp;
             </MKTypography>
           </Link>
-          for a better web.
+          &copy; {new Date().getFullYear()},
+          {/* <MKBox fontSize={size.md} color={light ? "white" : "text"} mb={-0.5} mx={0.25}></MKBox> */}
         </MKBox>
         <MKBox
           component="ul"
@@ -216,9 +198,9 @@ function SimpleFooter({ company, links, light }) {
 
 // Setting default values for the props of SimpleFooter
 SimpleFooter.defaultProps = {
-  company: { route: "/", name: "Home" },
+  company: { route: "/", name: "VerifyPro" },
   links: [
-    { route: routeLoc.HOME, name: "Home" },
+    { links: routeLoc.HOME, name: "Home" },
     { route: routeLoc.ABOUT_US, name: "About Us" },
     { route: routeLoc.DEMO, name: "Demo" },
     { route: routeLoc.DASHBOARD, name: "Dashboard" },

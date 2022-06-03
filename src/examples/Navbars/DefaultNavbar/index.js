@@ -1,7 +1,5 @@
 /* eslint-disable react/prop-types */
 import { Fragment, useState, useEffect } from "react";
-
-// react-router components
 import { Link } from "react-router-dom";
 
 // prop-types is a library for typechecking of props.
@@ -15,8 +13,6 @@ import Grow from "@mui/material/Grow";
 import Grid from "@mui/material/Grid";
 import Divider from "@mui/material/Divider";
 import MuiLink from "@mui/material/Link";
-
-// Material Kit 2 React components
 import MKBox from "components/MKBox";
 import MKTypography from "components/MKTypography";
 import MKButton from "components/MKButton";

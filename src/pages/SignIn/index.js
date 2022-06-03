@@ -8,29 +8,16 @@ import Card from "@mui/material/Card";
 import Switch from "@mui/material/Switch";
 import Grid from "@mui/material/Grid";
 import MuiLink from "@mui/material/Link";
-
-// @mui icons
 import FacebookIcon from "@mui/icons-material/Facebook";
-import GitHubIcon from "@mui/icons-material/GitHub";
 import GoogleIcon from "@mui/icons-material/Google";
-
-// Material Kit 2 React components
 import MKBox from "components/MKBox";
 import MKTypography from "components/MKTypography";
 import MKInput from "components/MKInput";
 import MKButton from "components/MKButton";
-
-// Material Kit 2 React example components
 import DefaultNavbar from "examples/Navbars/DefaultNavbar";
 import { SimpleFooter } from "pages/Footer";
-
-// Material Kit 2 React page layout routes
 import { routes, routeLoc } from "routes";
-
-// Images
-import bgImage from "assets/images/bg-sign-in-basic.jpeg";
-
-// Firebase
+import bgImage from "assets/images/background/realestate1.jpeg";
 import { auth, signInWithGoogle } from "lib/firebase.prod";
 import { useAuthState } from "react-firebase-hooks/auth";
 import { signInWithEmailAndPassword } from "firebase/auth";
@@ -132,14 +119,14 @@ function SignInBasic() {
                   Sign in
                 </MKTypography>
                 <Grid container spacing={3} justifyContent="center" sx={{ mt: 1, mb: 2 }}>
-                  <Grid item xs={2}>
+                  {/* <Grid item xs={2}>
                     <MKTypography component={MuiLink} href="#" variant="body1" color="white">
                       <FacebookIcon color="inherit" />
                     </MKTypography>
-                  </Grid>
+                  </Grid> */}
                   <Grid item xs={2}>
                     <MKTypography component={MuiLink} href="#" variant="body1" color="white">
-                      <GitHubIcon color="inherit" />
+                      <FacebookIcon color="inherit" onClick={signInWithGoogle} />
                     </MKTypography>
                   </Grid>
                   <Grid item xs={2}>
@@ -227,7 +214,7 @@ function SignInBasic() {
         </Grid>
       </MKBox>
       <MKBox width="100%" position="absolute" zIndex={2} bottom="1.625rem">
-        <SimpleFooter light />
+        <SimpleFooter light name="VerifyPro" />
       </MKBox>
     </>
   );

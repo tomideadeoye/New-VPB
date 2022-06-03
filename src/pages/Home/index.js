@@ -7,28 +7,21 @@ import Card from "@mui/material/Card";
 import MKBox from "components/MKBox";
 import MKTypography from "components/MKTypography";
 import MKSocialButton from "components/MKSocialButton";
-
 import { DefaultFooter } from "pages/Footer";
 import FilledInfoCard from "examples/Cards/InfoCards/FilledInfoCard";
-
-// Presentation page sections
 import Information from "pages/Home/sections/Information";
 // import DesignBlocks from "pages/Home/sections/DesignBlocks";
 // import Pages from "pages/Home/sections/Pages";
 import Testimonials from "pages/Home/sections/Testimonials";
 // import Download from "pages/Home/sections/Download";
 import Faqs from "pages/Home/sections/Faqs";
-
-// Home page components
 import BuiltByDevelopers from "pages/Home/components/BuiltByDevelopers";
-
-// import routes from "routes";
 import { routeLoc, footerRoutes } from "routes";
-
-// Images
+import subscribeImage from "assets/images/gifs/joingif.gif";
 import bgImage from "assets/images/bg-presentation.jpg";
 import NavbarDark from "components/CustomComponents/NavbarDark";
 import GoogleMapComponent from "components/CustomComponents/GoogleMapComponent";
+import Waitlist from "./sections/Waitlist";
 
 function Home() {
   return (
@@ -88,6 +81,7 @@ function Home() {
         <Faqs />
         {/* <DesignBlocks /> */}
         {/* <Pages /> */}
+        <Waitlist image={subscribeImage} />
         <Container sx={{ mt: 6 }}>
           <BuiltByDevelopers />
         </Container>
