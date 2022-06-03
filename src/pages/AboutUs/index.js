@@ -7,8 +7,6 @@ import MKButton from "components/MKButton";
 import DefaultNavbar from "examples/Navbars/DefaultNavbar";
 import { DefaultFooter } from "pages/Footer";
 import { authListener } from "hooks";
-
-// About Us page sections
 import Information from "pages/AboutUs/sections/Information";
 import Team from "pages/AboutUs/sections/Team";
 // import Featuring from "pages/AboutUs/sections/Featuring";

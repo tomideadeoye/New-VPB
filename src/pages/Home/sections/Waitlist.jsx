@@ -37,7 +37,7 @@ function Waitlist({ image }) {
           height="calc(80vh - 2rem)"
           borderRadius="lg"
           ml={2}
-          mt={2}
+          mt={0}
           sx={{
             backgroundImage: `url(${image})`,
             backgroundRepeat: "no-repeat",

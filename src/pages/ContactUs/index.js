@@ -5,6 +5,7 @@ import { DefaultFooter } from "pages/Footer";
 
 import { routes, routeLoc, footerRoutes } from "routes";
 import Waitlist from "pages/Home/sections/Waitlist";
+import newsletter from "assets/images/newsletter.png";
 
 function ContactUs() {
   return (
@@ -20,7 +21,7 @@ function ContactUs() {
           }}
         />
       </MKBox>
-      <Waitlist />
+      <Waitlist image={newsletter} />
       <MKBox pt={6} px={1} mt={6}>
         <DefaultFooter content={footerRoutes} />
       </MKBox>
