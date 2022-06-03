@@ -11,11 +11,7 @@
 
 // @mui material components
 import Icon from "@mui/material/Icon";
-
-// @mui icons
 import PersonIcon from "@mui/icons-material/Person";
-
-// Pages
 import AboutUs from "pages/AboutUs";
 import ContactUs from "pages/ContactUs";
 import SignIn from "pages/SignIn";
@@ -31,8 +27,6 @@ import YouTubeIcon from "@mui/icons-material/YouTube";
 
 // Material Kit 2 React components
 import MKTypography from "components/MKTypography";
-
-// Images
 import VerifyPro from "assets/images/logos/logo.png";
 
 const date = new Date().getFullYear();
@@ -169,7 +163,6 @@ const footerRoutes = {
         { route: routeLoc.ABOUT_US, name: "About Us" },
         { route: routeLoc.DEMO, name: "Demo" },
         { route: routeLoc.DASHBOARD, name: "Dashboard" },
-        { route: routeLoc.BLOG, name: "Blog" },
       ],
     },
     {
@@ -183,18 +176,19 @@ const footerRoutes = {
     {
       name: "help & support",
       items: [
-        { name: "contact us", route: routeLoc.HOME },
-        { name: "knowledge center", route: routeLoc.HOME },
+        { name: "contact us", route: routeLoc.CONTACT_US },
+        { name: "The Team", route: routeLoc.ABOUT_US },
+        { route: routeLoc.BLOG, name: "Blog" },
       ],
     },
-    {
-      name: "legal",
-      items: [
-        { name: "terms & conditions", route: routeLoc.HOME },
-        { name: "privacy policy", route: routeLoc.HOME },
-        { name: "licenses (EULA)", route: routeLoc.HOME },
-      ],
-    },
+    // {
+    //   name: "legal",
+    //   items: [
+    //     { name: "terms & conditions", route: routeLoc.HOME },
+    //     { name: "privacy policy", route: routeLoc.HOME },
+    //     { name: "licenses (EULA)", route: routeLoc.HOME },
+    //   ],
+    // },
   ],
   copyright: (
     <MKTypography variant="button" fontWeight="regular">
