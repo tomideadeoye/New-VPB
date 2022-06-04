@@ -86,8 +86,8 @@ function Waitlist({ image }) {
             {!sent ? (
               <>
                 <MKTypography variant="body2" color="text" mb={3}>
-                  Do you want register for a Certificate of Occupancy or get a certified true copy?
-                  Join the wait list below
+                  Do you want to register for a Certificate of Occupancy or get a certified true
+                  copy? Join the wait list below
                 </MKTypography>
                 <MKBox width="100%" component="form" method="post" onSubmit={handleSubmit}>
                   {/* autocomplete="off" > */}
@@ -120,7 +120,7 @@ function Waitlist({ image }) {
                       <MKInput
                         variant="standard"
                         label="How can we help you?"
-                        placeholder={`Give us more details about your project \nexample: I have a survey paln but would also like to get a certificate of occupancy. `}
+                        placeholder={`Give us more details about your project \nexample: I have a survey plan but would also like to get a certificate of occupancy.`}
                         InputLabelProps={{ shrink: true }}
                         multiline
                         fullWidth
