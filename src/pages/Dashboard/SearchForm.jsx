@@ -166,7 +166,7 @@ function SearchForm() {
     <Container sx={{ m: 3 }}>
       <Grid container item justifyContent="center" xs={10} lg={7} mx="auto" textAlign="center">
         <MKTypography variant="h3" mb={1}>
-          Make a Search
+          Make a title Search
         </MKTypography>
       </Grid>
 

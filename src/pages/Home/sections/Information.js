@@ -21,9 +21,9 @@ function Information() {
                 icon={logo}
                 title={
                   <>
-                    Do you
+                    Have you made a
                     <br />
-                    want to verify now?
+                    title search before?
                   </>
                 }
                 description="Let's take you to your dashboard."

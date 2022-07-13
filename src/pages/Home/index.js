@@ -21,7 +21,9 @@ import subscribeImage from "assets/images/gifs/joingif.gif";
 import bgImage from "assets/images/bg-presentation.jpg";
 import NavbarDark from "components/CustomComponents/NavbarDark";
 import GoogleMapComponent from "components/CustomComponents/GoogleMapComponent";
+import SearchForm from "pages/Dashboard/SearchForm";
 import Waitlist from "./sections/Waitlist";
+import Listings from "./components/Listings";
 
 function Home() {
   return (
@@ -77,8 +79,9 @@ function Home() {
           boxShadow: ({ boxShadows: { xxl } }) => xxl,
         }}
       >
+        <SearchForm />
+        <Listings />
         <Information />
-        <Faqs />
         {/* <DesignBlocks /> */}
         {/* <Pages /> */}
         <Waitlist image={subscribeImage} />
@@ -88,7 +91,6 @@ function Home() {
         <Container sx={{ mt: 6, bgcolor: "background.paper", boxShadow: 0.3, borderRadius: 2 }}>
           <GoogleMapComponent />
         </Container>
-
         <Container>
           <Grid container spacing={3}>
             <Grid item xs={12} lg={4}>
@@ -133,8 +135,8 @@ function Home() {
             </Grid>
           </Grid>
         </Container>
-
         <Testimonials />
+        <Faqs />
         {/* <Download /> */}
         <MKBox pt={18} pb={6}>
           <Container>
